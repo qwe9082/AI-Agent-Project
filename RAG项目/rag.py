@@ -18,10 +18,13 @@ class RagService:
                 ("system", "以我提供的已知参考资料为主,简介和专业的回答用户的提问。参考资料{context}."),
                 ("system", "并且我提供用户的历史记录如下{history}"),
                 MessagesPlaceholder("history"),
-                ("user", "回答用户提问{input}")
+                ("user", "请回答用户提问{input}")
             ]
         )
-        self.chat_model = ChatTongyi(model=config.chat_model_name)
+        self.chat_model = ChatTongyi(
+            model=config.chat_model_name,
+            streaming=True,
+        )
 
         self.chain = self.__get_chain()
 
@@ -67,4 +70,4 @@ if __name__ == '__main__':
 
     chain = service.chain
     
-    print(chain.invoke({"input": "我的体重180斤，尺码推荐"}, session_config))
+    print(chain.invoke({"input": "锦城湖公园如何游玩"}, session_config))

@@ -46,4 +46,4 @@ class FileChatMessageHistory(BaseChatMessageHistory):
             json.dump([], f)
 
 def get_history(session_id):
-    return FileChatMessageHistory(session_id, "./chat_history")
+    return FileChatMessageHistory("./chat_history", session_id)
